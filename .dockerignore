@@ -1,0 +1,10 @@
+# File Description:
+# This file is used to ignore files and directories when building the docker container.
+
+node_modules
+Dockerfile
+.dockerignore
+.git
+.gitignore
+*.md
+docker

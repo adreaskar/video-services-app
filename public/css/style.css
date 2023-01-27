@@ -1,0 +1,199 @@
+:root {
+    --bg-color:#0f1317;
+    --primary-color:#ff512f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+span, a {
+    font-size: 20px;
+    text-decoration: none;
+}
+
+button:not(.btn-close), .btn {
+    background-color: var(--primary-color) !important;
+    box-shadow: none !important;
+}
+
+button:not(.btn-close):hover, .btn:hover {
+    background-color: #d6583f !important;
+}
+
+nav {
+    background: white;
+    border-bottom: 1px solid #b8b7b74c;
+    height: 80px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 20;
+}
+
+    .nav-container {
+        display: flex;
+        margin: auto;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        width: 60%;
+    }
+
+        .logo {
+            display: flex;
+            width: max-content;
+            align-items: center;
+        }
+
+            .logo i {
+                font-size: 25px;
+                margin-right: 8px;
+                color: var(--primary-color);
+            }
+
+        .menu {
+            display: inline-flex;
+            justify-content: space-between;
+            width: 350px;
+        }
+
+            .menu a {
+                border-bottom: 3px solid transparent;
+                color: gray;
+            }
+            .menu a:hover {
+                color: var(--primary-color);
+                border-bottom: 3px solid var(--primary-color);
+            }
+            .menu .selected {
+                color: var(--primary-color);
+            }
+
+        .login {
+            display: inline-block;
+            width: max-content;
+        }
+
+            .login a {
+                color: var(--primary-color);
+                border: 2px solid var(--primary-color);
+                padding: 5px 10px;
+                border-radius: 5px;
+            }
+
+            .login a:hover {
+                background-color: var(--primary-color);
+                color: white !important;
+                cursor: pointer;
+            }
+
+            .nav-link.active {
+                background-color: #f999869d !important;
+                color: white !important;
+            }
+
+.first-section {
+    display: flex;
+    justify-content: center;
+    height: max-content;
+    padding: 40px 0;
+    background-color: var(--bg-color);
+}
+
+    .columns {
+        height: 650px;
+        width: 60%;
+    }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: left;
+        }
+
+            #subtitle {
+                font-size: 30px;
+                color: white;
+            }
+
+            #subtitle b{
+                color: var(--primary-color);
+            }
+
+            .left span {
+                color: white;
+            }
+
+            .left img{
+                max-width: 500px;
+            }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .right img {
+                border-bottom: 2px solid var(--primary-color);
+                border-top: 2px solid var(--primary-color);
+                padding: 20px 10px;
+                max-width: 400px;
+            }
+
+.second-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: max-content;
+    padding: 40px 0;
+}
+
+    .second-section .row {
+        width: 60%;
+    }
+
+    .second-section span {
+        padding: 10px 0px 50px 0px;
+        font-size: 40px;
+        color: var(--bg-color);
+    }
+
+    .second-section .card {
+        height: 100%;
+        background-color: var(--bg-color);
+    }
+
+        .second-section .card .card-footer{
+            padding: 0px 0px 22px 25px;
+            border-top: transparent;
+        }
+
+        .second-section .card h5{
+            color: white;
+        }
+
+        .second-section .card p{
+            color: rgb(186, 186, 186);
+        }
+    
+.footer {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    justify-content: space-evenly;
+}

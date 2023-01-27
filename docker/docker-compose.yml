@@ -1,0 +1,44 @@
+# File Description:
+#   - This file is used to build and run the project in docker containers
+#   - The file is executed by the docker-compose command
+#   - The docker-compose command is executed by the 'npm run docker' command
+
+# Services Description:
+#   - web: web application container
+#   - mongo: MongoDB database container
+
+# Volumes Description:
+#   - Volumes are used to persist data between container restarts
+#   - The volumes are defined in the volumes section of the file
+#   - mongo-db: MongoDB database volume
+
+version: "3"
+services: 
+  web:
+    container_name: video-services-app
+    # image: adreaskar/video-services-app:latest
+    image: video-services-image
+    build: 
+      context: .
+    ports:
+      - "4000:4000"    
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/docker/
+    command: npm run dev
+    restart: always
+    depends_on:
+      - "mongo"
+
+  mongo:
+    container_name: video-services-mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+    restart: always
+
+volumes:
+  mongodb:
