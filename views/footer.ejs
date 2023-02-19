@@ -1,11 +1,78 @@
-        <!-- Footer -->
-        <div class="footer">
-            <span>© 2017. All Rights Reserved.</span>
-            <span>Terms of Use | Privacy Policy</span>
-        </div>
+<!-- Footer -->
+<div class="footer">
+    <p>© <script>document.write(new Date().getFullYear())</script>. All Rights Reserved.</p>
+    <p> Created by: VideoExperts</p>
+</div>
 
-        <script src="/js/bootstrap.bundle.min.js"></script>
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/mdb.min.js"></script>
-    </body>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/mdb.min.js"></script>
+<script src="/js/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<!-- Toastr options -->
+<script>
+    
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1500",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    
+</script>
+
+<!-- Display toast after actions -->
+<script>
+    if (sessionStorage.getItem("reg")=='1'){
+        toastr.success("User registered successfully!", "Notification:");
+        sessionStorage.removeItem("reg");
+    } else if (sessionStorage.getItem("del")=='1'){
+        toastr.success("User deleted successfully", "Notification:");
+        sessionStorage.removeItem("del");
+    } else if (sessionStorage.getItem("edit")=='1'){
+        toastr.success("User edited successfully", "Notification:");
+        sessionStorage.removeItem("edit");
+    } else if (sessionStorage.getItem("ser")=='1'){
+        toastr.success("Service deleted successfully", "Notification:");
+        sessionStorage.removeItem("ser");
+    } else if (sessionStorage.getItem("sered")=='1'){
+        toastr.success("Service edited successfully", "Notification:");
+        sessionStorage.removeItem("sered");
+    } else if (sessionStorage.getItem("serad") =='1') {
+        toastr.success("Service added successfully", "Notification:");
+        sessionStorage.removeItem("serad");
+    }
+</script>
+
+<!-- Script to get cities of the selected country -->
+<%- include('citiesScript') -%>
+
+<!-- Script to send login data to server -->
+<%- include('loginScript') -%>
+
+<!-- Script to send registration data to server -->
+<%- include('registerScript') -%>
+
+<!-- Script to send booking data to server -->
+<%- include('bookScript') -%>
+
+<!-- Script to manage users -->
+<%- include('usersScript') -%>
+
+<!-- Script to manage services -->
+<%- include('servicesScript') -%>
+
+</body>
+
 </html>

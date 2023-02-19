@@ -1,0 +1,44 @@
+<% const page="My Bookings"%>
+
+<!-- Header -->
+<%- include('header', {title:page}) -%>
+
+    <!-- Navbar -->
+    <%- include('navbar', {selected:page, countryNames:countryNames, user:user, state:state}) -%>
+
+        <!-- First Section -->
+        <div class="first-section">
+
+            <span id="subtitle">Your Bookings</span>
+
+        </div>
+
+        <!-- Second Section -->
+        <div class="second-section">
+
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Service</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through bookings array -->
+                        <% bookings.forEach(booking => { %>
+                            <tr>
+                                <td><%= booking.date %></td>
+                                <td><%= booking.service %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+                
+
+            </div>
+
+        </div>        
+
+<%- include('footer') -%>

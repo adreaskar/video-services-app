@@ -1,13 +1,18 @@
-<% const menu = [{name:"Home", path:"/"}, {name:"About", path:"/about"}, {name:"Services", path:"/services"}] %>
+<% let menu = [{name:"Home", path:"/"}, {name:"Services", path:"/services"}] %>
+<% if (state == "user") menu.push({name:"My Bookings", path:"/bookings"}) %>
+
+<% if (state == "admin") menu = [{name:"Home", path:"/"}, {name:"Users", path:"/users"}, {name:"Services", path:"/adminservices"}] %>
 
 <nav>
     <div class="nav-container">
 
+        <!-- Logo -->
         <div class="logo">        
             <i class="fas fa-camera-retro"></i>
             <span>VideoExperts</span>
         </div>
 
+        <!-- Menu -->
         <div class="menu">
             <% menu.forEach((item) => { %>
                 <% if (item.name === selected) { %>
@@ -17,12 +22,24 @@
                 <% } %>
             <% }); %>
         </div>
+        
+        <!-- If the user is not logged in, show the login button -->
+        <% if (user === null) { %>
 
-        <div class="login">
-            <a data-mdb-toggle="modal" data-mdb-target="#loginModal">Login</a>
-        </div>
+            <div class="login">
+                <a data-mdb-toggle="modal" data-mdb-target="#loginModal">Login</a>
+            </div>
 
-        <%- include('modal') -%>
+            <%- include('modal', {countryNames:countryNames}) -%>           
+
+        <!-- If the user is logged in, show the logout button -->
+        <% } else { %>
+
+            <div class="login">
+                <a href="/logout">Logout</a>
+            </div>
+
+        <% } %>
         
     </div>
 </nav>

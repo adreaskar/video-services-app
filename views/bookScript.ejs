@@ -1,0 +1,51 @@
+<script>
+    $(document).ready(function () {
+
+        var service = "";
+
+        // Prevent form from submission
+        $("#bookform").submit(function (e) {
+            e.preventDefault();
+        })
+
+        $(".booknow").click(function () {
+            if (username === null) {
+                toastr.error("Please login to book a service", "Error");
+                return;
+            } else {
+                // Get service name
+                service = $(this).parent().parent().find(".card-title").text();
+            }
+        });
+
+        // Book service
+        $("#bookbutton").click(function () {
+
+            let bookdate = $("#bookdate").val();
+
+            // Check if date is selected
+            if (bookdate === "") {
+                toastr.error("Please select a date", "Error");
+                return;
+            } else {
+                // Send data to server
+                $.ajax({
+                    url: "/book",
+                    type: "POST",
+                    data: {
+                        service: service,
+                        bookdate: bookdate,
+                        user: username
+                    },
+                    success: function (data) {
+                        toastr.success("Service booked successfully", "Success");
+                        $("#bookModal").modal("hide");
+                    },
+                    error: function (err) {
+                        toastr.error(err.responseText, "Error");
+                    }
+                });
+            }
+        });
+    })
+</script>

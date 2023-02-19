@@ -1,0 +1,99 @@
+<script>
+    $(document).ready(function () {
+
+        // Collecting existing data from the table
+        $(".editservice").click(function () {
+            const sername = $(this).parent().parent().children()[0].children[0].children[1].children[0].innerHTML
+            const serdescription = $(this).parent().parent().children()[1].children[0].innerHTML
+
+            // Setting the values of the modal
+            $("#serviceModal").modal("show");
+            $("#serviceModal").on("shown.bs.modal", function () {
+                $("#serForm #sername").val(sername);
+                $("#serForm #serdescription").val(serdescription);
+            });
+
+            $("#updateservice").click(function () {
+                const newName = $("#serForm #sername").val();
+                const newDesc = $("#serForm #serdescription").val();
+                const newImage = $('#serForm #serimage').prop('files')[0];
+
+                // Creating a form data object
+                let form_data = new FormData();                  
+                form_data.append('image', newImage);
+                form_data.append('name', newName);
+                form_data.append('description', newDesc);
+
+                // Sending the data to the server
+                $.ajax({
+                    url: "/services/edit",
+                    type: "POST",
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        sessionStorage.setItem("sered", "1");
+                        window.location.href = "/adminservices";
+                    }
+                });
+            });
+            
+        });
+        
+        // Deleting a service
+        $(".deleteservice").click(function () {
+
+            const service = $(this).parent().parent().children()[0].children[0].children[1].children[0].innerHTML
+
+            $.ajax({
+                url: "/services/delete",
+                type: "POST",
+                data: {
+                    service:service
+                },
+                success: function (data) {
+                    sessionStorage.setItem("ser", "1");
+                    window.location.href = "/adminservices";
+                }
+            });
+            
+        });
+
+        // Adding a new service
+        $(".addservice").click(function () {
+            $("#addModal").modal("show");
+
+            $("#addeservice").click(function () {
+                const newName = $("#addSerForm #addsername").val();
+                const newDesc = $("#addSerForm #addserdescription").val();
+                const newImage = $('#addSerForm #addserimage').prop('files')[0];
+
+                // Creating a form data object
+                let form_data = new FormData();                  
+                form_data.append('image', newImage);
+                form_data.append('name', newName);
+                form_data.append('description', newDesc);
+
+                // Sending the data to the server
+                $.ajax({
+                    url: "/services/add",
+                    type: "POST",
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        sessionStorage.setItem("serad", "1");
+                        window.location.href = "/adminservices";
+                    },
+                    error: function (request, status, error) {
+
+                        if (request.status == 400) {
+                            toastr.error(request.responseText, "Error");
+                        }
+                    }
+                });
+            });
+        });
+        
+    })
+</script>

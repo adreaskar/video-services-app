@@ -1,0 +1,37 @@
+<script>
+    $(document).ready(function () {
+        
+        $('#selectedCountry').on('change', async () => {
+
+            try {
+                let selectedCountry = await $(this).val();
+
+            } catch (error) {
+                console.log(error);
+            }
+
+            // Make a post request to get the cities of the selected country
+            $.ajax({
+                url: 'https://countriesnow.space/api/v0.1/countries/cities',
+                type: 'POST',
+                data: {
+                    country: selectedCountry.value
+                },
+                success: data => {
+                    // Array of cities
+                    let cities = data.data;
+
+                    // Create options for the cities
+                    let option = '';
+                    for (var i = 0; i < cities.length; i++) {
+                        option += '<option value="' + cities[i] + '">' + cities[i] + '</option>';
+                    }
+                    // Remove the previous options
+                    $('#selectedCity').find('option').not(':first').remove();
+                    // Append the new options
+                    $('#selectedCity').append(option);
+                }
+            });
+        });
+    });
+</script>

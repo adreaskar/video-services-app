@@ -15,7 +15,15 @@ html {
 
 body {
     font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
     background: #fafafa;
+    position: relative;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 50px; /* Set same as footer's height */
 }
 
 span, a {
@@ -23,13 +31,15 @@ span, a {
     text-decoration: none;
 }
 
-button:not(.btn-close), .btn {
+button:not(.btn-close, .toast-close-button), .btn {
     background-color: var(--primary-color) !important;
     box-shadow: none !important;
+    color: white;
 }
 
-button:not(.btn-close):hover, .btn:hover {
+button:not(.btn-close, .toast-close-button):hover, .btn:hover {
     background-color: #d6583f !important;
+    color: white;
 }
 
 nav {
@@ -65,7 +75,7 @@ nav {
 
         .menu {
             display: inline-flex;
-            justify-content: space-between;
+            justify-content: space-around;
             width: 350px;
         }
 
@@ -120,7 +130,7 @@ nav {
         .left {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: left;
         }
 
@@ -196,4 +206,6 @@ nav {
     height: 50px;
     width: 100%;
     justify-content: space-evenly;
+    position: absolute;
+    bottom: 0;
 }

@@ -16,10 +16,7 @@ version: "3"
 services: 
   web:
     container_name: video-services-app
-    # image: adreaskar/video-services-app:latest
-    image: video-services-image
-    build: 
-      context: .
+    image: adreaskar/video-services-app:latest
     ports:
       - "4000:4000"    
     volumes:

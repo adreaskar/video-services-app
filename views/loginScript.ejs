@@ -1,0 +1,45 @@
+<script>
+    $(document).ready(function () {
+
+        $("#loginForm").submit(function (e) {
+            e.preventDefault();
+        });
+
+        // Submit login form
+        $('#loginButton').click(async () => {
+
+            // Get username and password
+            const username = $('#usernameLogin').val();
+            const password = $('#passwordLogin').val();
+
+            // Create user object
+            const user = {
+                username: username,
+                password: password
+            };
+
+            // Send login data to server
+            try {
+                await axios
+                    .post("/login", user)
+                    .then((response) => {
+                        window.location.href = "/"+response.data;
+                    })
+            } catch (error) {
+
+                if (error.response.status == 401) {
+                    if (error.response.data == "pending") {
+                        toastr.warning('Your account is pending, please wait for an admin to approve it.', 'Warning');
+                        return;
+                    }     
+                    toastr.error('Wrong username or password, please try again.', 'Error');
+                } else if (error.response.status == 500) {
+                    toastr.error('Internal server error, please try again later.', 'Error');
+                } else {
+                    toastr.error('Something went wrong, please try again later.', 'Error');
+                }
+            }
+        })
+
+    });
+</script>

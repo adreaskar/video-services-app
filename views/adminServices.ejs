@@ -1,0 +1,164 @@
+<% const page="Services" %>
+
+<!-- Header -->
+<%- include('header', {title:page}) -%>
+
+    <!-- Navbar -->
+    <%- include('navbar', {selected:page, countryNames:countryNames, user:user}) -%>
+
+        <!-- First Section -->
+        <div class="first-section">
+
+            <span id="subtitle">Platform Services</span>
+
+        </div>
+
+        <!-- Second Section -->
+        <div class="second-section">
+
+            <div class="row row-cols-1 row-cols-md-4 g-4" style="justify-content: center;">
+
+                <table class="table align-middle mb-0 bg-white">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Service Name</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through users array -->
+                        <% services.forEach(service=> { %>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="img/<%= service.image %>" alt=""
+                                            style="width: 45px; height: 45px" class="rounded" />
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1"><%= service.name %></p>
+                                            <p class="text-muted mb-0"><%= service.slug %></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                                <td>
+                                    <p class="fw-normal mb-1"><%= service.description %></p>
+                                </td>
+
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-rounded editservice">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-rounded deleteservice">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+
+                <button type="button" class="btn btn-primary btn-rounded addservice" style="width: 80px;">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+
+                <!-- Edit Modal -->
+                <div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit the service</h5>
+                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <form id="serForm" enctype="multipart/form-data">
+                                    <!-- Service Name -->
+                                    <div class="row mb-4" style="width: 100%;">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <input type="text" class="form-control" name="sername" required id="sername"/>
+                                                <label class="form-label">Service Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Description textarea -->
+                                    <div class="row mb-4" style="width: 100%;">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <textarea class="form-control" name="serdescription" id="serdescription" required rows="6"></textarea>
+                                                <label class="form-label">Description</label>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <!-- Image -->
+                                    <div class="row mb-4" style="width: 100%;">
+                                        <div class="col">
+                                            <label class="form-label" for="serimage">Change the image</label>
+                                            <input type="file" class="form-control" id="serimage" name="serimage"/>    
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="updateservice" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Modal -->
+                <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add a new service</h5>
+                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <form id="addSerForm" enctype="multipart/form-data">
+
+                                    <!-- Service Name -->
+                                    <div class="row mb-4" style="width: 100%;">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <input type="text" class="form-control" name="sername" required id="addsername"/>
+                                                <label class="form-label">Service Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Description textarea -->
+                                    <div class="row mb-4" style="width: 100%;">
+                                        <div class="col">
+                                            <div class="form-outline">
+                                                <textarea class="form-control" name="serdescription" id="addserdescription" required rows="6"></textarea>
+                                                <label class="form-label">Description</label>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <!-- Image -->
+                                    <div class="row mb-4" style="width: 100%;">
+                                        <div class="col">
+                                            <label class="form-label" for="serimage">Upload an image</label>
+                                            <input type="file" class="form-control" id="addserimage" name="serimage"/>    
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="addeservice" class="btn btn-primary">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+<%- include('footer') -%>

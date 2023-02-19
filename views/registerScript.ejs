@@ -1,0 +1,54 @@
+<script>
+    $(document).ready(function () {
+
+        $("#registerForm").submit(function (e) {
+            e.preventDefault();
+        });
+
+        // Submit login form
+        $('#registerButton').click(async () => {
+
+            // Get username and password
+            const firstname = $('#firstname').val();
+            const lastname = $('#lastname').val();
+            const selectedCountry = $('#selectedCountry').val();
+            const selectedCity = $('#selectedCity').val();
+            const address = $('#address').val();
+            const email = $('#email').val();
+            const username = $('#registerUsername').val();
+            const password = $('#registerPassword').val();
+
+            // Create user object
+            const user = {
+                firstname: firstname,
+                lastname: lastname,
+                country: selectedCountry,
+                city: selectedCity,
+                address: address,
+                email: email,
+                username: username,
+                password: password
+            };
+
+            // Send login data to server
+            try {
+                await axios
+                    .post("/register", user)
+                    .then((response) => {
+                        sessionStorage.setItem("reg", "1");
+                        window.location.href = "/";
+                    })
+            } catch (error) {
+
+                if (error.response.status == 401) {
+                    toastr.error('User already exists.', 'Error');
+                } else if (error.response.status == 500) {
+                    toastr.error('Internal server error, please try again later.', 'Error');
+                } else {
+                    toastr.error('Something went wrong, please try again later.', 'Error');
+                }
+            }
+        })
+
+    });
+</script>

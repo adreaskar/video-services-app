@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 const path = require('path');
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
 
 // Database connection.
 mongoose.set('strictQuery', false);
@@ -17,7 +18,6 @@ async function conn() {
   await mongoose.connect('mongodb://mongo/VEDB');
   console.log('[INFO] - Connected to MongoDB');
 }
-
 conn().catch(err => console.log('[ERROR] - Could not connect to MongoDB\n', err));
 
 // Create express app and http server.
@@ -37,6 +37,7 @@ app.use("/css",express.static(path.join(__dirname, "node_modules/mdb-ui-kit/css"
 app.use("/js",express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")))
 app.use("/js",express.static(path.join(__dirname, "node_modules/mdb-ui-kit/js")))
 app.use("/js",express.static(path.join(__dirname, "node_modules/jquery/dist")))
+app.use("/js",express.static(path.join(__dirname, "node_modules/axios/dist")))
 
 app.use(session({
   secret:'videoexperts',
@@ -48,14 +49,32 @@ app.use(session({
   })
 }));
 
+app.use(fileUpload({
+  limits: {
+      fileSize: 10000000, // Limit file upload to around 10MB
+  },
+  abortOnLimit: true,
+}));
+
 // Routes.
 // Import the routes of our application.
 const homeRoute = require('./routes/homeRoute');
+const registerRoute = require('./routes/registerRoute');
+const loginRoute = require('./routes/loginRoute');
+const logoutRoute = require('./routes/logoutRoute');
+const servicesRoute = require('./routes/servicesRoute');
+const bookingRoute = require('./routes/bookingRoute');
+const usersRoute = require('./routes/usersRoute');
 
 // Use the routes.
 app.use(homeRoute);
+app.use(registerRoute);
+app.use(loginRoute);
+app.use(logoutRoute);
+app.use(servicesRoute);
+app.use(bookingRoute);
+app.use(usersRoute);
 
 server.listen(4000, () => {
   console.log('[INFO] - Server is running on port 4000');
 });
-

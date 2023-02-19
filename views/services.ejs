@@ -1,0 +1,96 @@
+<% const page="Services"%>
+<% if (user) { %>
+    <script>
+        var username = '<%=user%>';
+    </script>
+<% } else { %>
+    <script>
+        var username = null;
+    </script>
+<% } %>
+
+<!-- Header -->
+<%- include('header', {title:page}) -%>
+
+    <!-- Navbar -->
+    <%- include('navbar', {selected:page, countryNames:countryNames, user:user}) -%>
+
+        <!-- First Section -->
+        <div class="first-section">
+
+            <span id="subtitle">What we provide</span>
+
+        </div>
+
+        <!-- Second Section -->
+        <div class="second-section">
+
+            <p>You can book 1 service / day</p>
+
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+
+                <!-- Loop through services array -->
+                <% services.forEach((service) => { %>
+
+                    <div class="col">
+                        <div class="card">
+                            <img src="img/<%=service.image %>" class="card-img-top" alt="<%=service.name%>" />
+                            <div class="card-body">
+                                <h5 class="card-title"><%=service.name%></h5>
+                                <p class="card-text">
+                                    <%=service.description%>
+                                </p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <% if (user) {%>
+                                    <button
+                                        type="button"
+                                        class="btn btn-primary booknow"
+                                        data-mdb-toggle="modal"
+                                        data-mdb-target="#bookModal"
+                                        >
+                                        Book Now
+                                    </button>
+                                <% } else { %>
+                                
+                                    <button
+                                        type="button"
+                                        class="btn btn-primary booknow"
+                                        >
+                                        Book Now
+                                    </button>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+
+                <% }) %>
+
+                <!-- Book Modal -->
+                <div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Book your date</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="bookform">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Choose date:</label>
+                                    <input type="date" name="bookdate" id="bookdate">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="bookbutton" class="btn btn-primary">Book now</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>        
+
+<%- include('footer') -%>
