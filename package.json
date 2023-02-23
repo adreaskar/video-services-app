@@ -5,8 +5,10 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon -L app.js",
-    "docker": "docker-compose --project-directory ./  -f ./docker/docker-compose.yml up -d",
-    "docker:down": "docker-compose --project-directory ./  -f ./docker/docker-compose.yml down",
+    "docker:dev": "docker-compose --project-directory ./  -f ./docker/docker-compose.yml up -d",
+    "docker:downdev": "docker-compose --project-directory ./  -f ./docker/docker-compose.yml down",
+    "docker": "docker-compose --project-directory ./  -f ./docker/docker-compose.prod.yml up -d",
+    "docker:down": "docker-compose --project-directory ./  -f ./docker/docker-compose.prod.yml down",
     "docker:build": "docker-compose --project-directory ./  -f ./docker/docker-compose.yml up -d --build"
   },
   "author": "",

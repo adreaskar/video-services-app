@@ -1,5 +1,5 @@
 # File Description:
-#   - This file is used to build and run the project in docker containers
+#   - This file is used to build and run the project in docker containers for production
 #   - The file is executed by the docker-compose command
 #   - The docker-compose command is executed by the 'npm run docker' command
 
