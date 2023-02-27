@@ -17,11 +17,14 @@ services:
   web:
     container_name: video-services-app
     image: adreaskar/video-services-image:latest
+    volumes:
+      - /app/node_modules
     ports:
       - "4000:4000" 
     command: node app.js
     depends_on:
       - "mongo"
+    restart: always
 
   mongo:
     container_name: video-services-mongo
