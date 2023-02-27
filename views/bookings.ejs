@@ -23,6 +23,7 @@
                         <tr>
                             <th scope="col">Date</th>
                             <th scope="col">Service</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,11 @@
                             <tr>
                                 <td><%= booking.date %></td>
                                 <td><%= booking.service %></td>
+                                <td style="width: 100px;">
+                                    <button type="button" class="btn btn-sm btn-rounded deletebooking">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </td>
                             </tr>
                         <% }); %>
                     </tbody>

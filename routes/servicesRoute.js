@@ -104,8 +104,9 @@ router.route("/services/edit")
         // Create the conditions and update for the service.
         const conditions = { name: data.name };
         const update = { 
-            name: data.name,
+            name: data.newName,
             description: data.description,
+            slug: data.newName.toLowerCase().replace(/ /g, "-")
         }
         if (data.image != undefined) {
             update.image = data.image
@@ -156,7 +157,6 @@ router.route("/adminservices")
     
             res.render("adminservices", { user: req.session.user, state: req.session.state, countryNames: [], services: services});
     })
-
 
 // Export the router.
 module.exports = router;

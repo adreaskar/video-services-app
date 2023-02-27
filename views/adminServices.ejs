@@ -30,7 +30,7 @@
                         <!-- Loop through users array -->
                         <% services.forEach(service=> { %>
                             <tr>
-                                <td>
+                                <td style="white-space: nowrap;">
                                     <div class="d-flex align-items-center">
                                         <img src="img/<%= service.image %>" alt=""
                                             style="width: 45px; height: 45px" class="rounded" />
@@ -45,11 +45,11 @@
                                     <p class="fw-normal mb-1"><%= service.description %></p>
                                 </td>
 
-                                <td>
+                                <td style="width: min-content;">
                                     <button type="button" class="btn btn-sm btn-rounded editservice">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-rounded deleteservice">
+                                    <button style="margin-top: 10px;" type="button" class="btn btn-sm btn-rounded deleteservice">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </td>
@@ -145,7 +145,7 @@
                                     <div class="row mb-4" style="width: 100%;">
                                         <div class="col">
                                             <label class="form-label" for="serimage">Upload an image</label>
-                                            <input type="file" class="form-control" id="addserimage" name="serimage"/>    
+                                            <input type="file" class="form-control" id="addserimage" name="serimage" required/>    
                                         </div>
                                     </div>
                                 </form>

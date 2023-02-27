@@ -31,8 +31,10 @@
                     if (error.response.data == "pending") {
                         toastr.warning('Your account is pending, please wait for an admin to approve it.', 'Warning');
                         return;
-                    }     
-                    toastr.error('Wrong username or password, please try again.', 'Error');
+                    } else if (error.response.data == "nouser") {
+                        toastr.error('Username / password combination does not exist', 'Error');
+                        return;
+                    }
                 } else if (error.response.status == 500) {
                     toastr.error('Internal server error, please try again later.', 'Error');
                 } else {

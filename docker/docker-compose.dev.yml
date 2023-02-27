@@ -1,5 +1,5 @@
 # File Description:
-#   - This file is used to build and run the project in docker containers for production
+#   - This file is used to build and run the project in docker containers for development
 #   - The file is executed by the docker-compose command
 #   - The docker-compose command is executed by the 'npm run docker' command
 
@@ -16,12 +16,18 @@ version: "3"
 services: 
   web:
     container_name: video-services-app
-    image: adreaskar/video-services-image:latest
+    build: 
+      context: .
     ports:
       - "4000:4000" 
-    command: node app.js
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/docker/
+    command: npm run dev
     depends_on:
       - "mongo"
+    restart: always
 
   mongo:
     container_name: video-services-mongo

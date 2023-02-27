@@ -33,7 +33,7 @@ router.route("/login")
                 // User does not exist
                 if (data.length === 0) {
                     console.log('[INFO] - Login failed: No user found');
-                    res.status(401).send("Login failed: No user found");
+                    res.status(401).send("nouser");
                 
                 // User exists
                 } else {

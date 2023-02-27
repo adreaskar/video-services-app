@@ -23,6 +23,14 @@ router.route("/users")
             console.log("[ERROR] - Failed to retrieve users from the database:", error);
         }
 
+        // Sort the users by state.
+        // Always put the users with pending state at the bottom.
+        users.sort((a, b) => {
+            if (a.state == "pending") return 1;
+            if (b.state == "pending") return -1;
+            return a.state.localeCompare(b.state);
+        });
+
         res.render("users", { user: req.session.user, state: req.session.state, countryNames: countryNames, users: users})
     })
 

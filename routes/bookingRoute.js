@@ -9,6 +9,7 @@ const Booking = require('../models/Booking');
 
 
 // GET: /bookings
+// Description: This route is responsible for handling the rendering of the bookings page.
 router.route("/bookings")
     .get( async (req, res) => {
 
@@ -84,6 +85,24 @@ router.route("/book")
 
         res.status(200).send("Booking saved.");
         
+    })
+
+router.route("/bookings/delete")
+    .post( async (req, res) => {
+
+        // Get the service and date from the request body.
+        const service = req.body.service;
+        const date = req.body.date;
+
+        // Delete the booking from the database.
+        try {
+            Booking.deleteOne({ service: service, date: date }).then(() => {
+                console.log("[INFO] - Deleted booking:", service, "on", date);
+                res.status(200).send("Booking deleted successfully.");
+            });
+        } catch (error) {
+            console.log("[ERROR] - Failed to delete booking from the database:", error);
+        }
     })
 
 // Export the router.

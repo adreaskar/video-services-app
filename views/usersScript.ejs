@@ -1,8 +1,9 @@
 <script>
     $(document).ready(function () {
-
-        // Collecting existing data from the table
+        
+        // Edit user
         $(".edituser").click(function () {
+            // Collect data from the table
             const firstname = $(this).parent().parent().children()[0].children[0].children[1].children[0].innerHTML.split(" ")[0]
             const lastname = $(this).parent().parent().children()[0].children[0].children[1].children[0].innerHTML.split(" ")[1]
             var username = $(this).parent().parent().children()[1].children[0].innerHTML
@@ -25,6 +26,7 @@
                 $("#editForm #address").val(address);
             });
 
+            // Update user
             $("#updateuser").click(function () {
                 const newFirstname = $("#editForm #firstname").val();
                 const newLastname = $("#editForm #lastname").val();
@@ -62,8 +64,7 @@
             
         });
 
-        
-        
+        // Delete user
         $(".deleteuser").click(function () {
 
             const username = $(this).parent().parent().children()[1].children[0].innerHTML

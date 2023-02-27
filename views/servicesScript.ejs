@@ -1,8 +1,10 @@
 <script>
     $(document).ready(function () {
 
-        // Collecting existing data from the table
+        // Editing a service
         $(".editservice").click(function () {
+
+            // Get current values from table
             const sername = $(this).parent().parent().children()[0].children[0].children[1].children[0].innerHTML
             const serdescription = $(this).parent().parent().children()[1].children[0].innerHTML
 
@@ -21,7 +23,8 @@
                 // Creating a form data object
                 let form_data = new FormData();                  
                 form_data.append('image', newImage);
-                form_data.append('name', newName);
+                form_data.append('name', sername);
+                form_data.append('newName', newName);
                 form_data.append('description', newDesc);
 
                 // Sending the data to the server
@@ -74,26 +77,43 @@
                 form_data.append('name', newName);
                 form_data.append('description', newDesc);
 
-                // Sending the data to the server
-                $.ajax({
-                    url: "/services/add",
-                    type: "POST",
-                    data: form_data,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        sessionStorage.setItem("serad", "1");
-                        window.location.href = "/adminservices";
-                    },
-                    error: function (request, status, error) {
+                if (validateFields(form_data)) {
+                    // Sending the data to the server
+                    $.ajax({
+                        url: "/services/add",
+                        type: "POST",
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                            sessionStorage.setItem("serad", "1");
+                            window.location.href = "/adminservices";
+                        },
+                        error: function (request, status, error) {
 
-                        if (request.status == 400) {
-                            toastr.error(request.responseText, "Error");
+                            if (request.status == 400) {
+                                toastr.error(request.responseText, "Error");
+                            }
                         }
-                    }
-                });
+                    });
+                } else {
+                    toastr.error('Please fill in all fields.', 'Error');
+                }
+
+                
             });
         });
         
     })
+
+    // Validate that all fields are filled in
+    function validateFields(data) {
+
+        if (data.image == undefined || data.name == undefined || data.description == undefined) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 </script>

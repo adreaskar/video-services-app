@@ -52,6 +52,9 @@
     } else if (sessionStorage.getItem("serad") =='1') {
         toastr.success("Service added successfully", "Notification:");
         sessionStorage.removeItem("serad");
+    }else if (sessionStorage.getItem("delb")=='1'){
+        toastr.success("Booking deleted successfully", "Notification:");
+        sessionStorage.removeItem("delb");
     }
 </script>
 

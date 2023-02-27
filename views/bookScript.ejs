@@ -8,6 +8,7 @@
             e.preventDefault();
         })
 
+        // Functionality for book now button
         $(".booknow").click(function () {
             if (username === null) {
                 toastr.error("Please login to book a service", "Error");
@@ -47,5 +48,29 @@
                 });
             }
         });
+
+        // Delete booking
+        $(".deletebooking").click(function () {
+
+            const service = $(this).parent().parent().children()[1].innerHTML;
+            const date = $(this).parent().parent().children()[0].innerHTML;
+
+            $.ajax({
+                url: "/bookings/delete",
+                type: "POST",
+                data: {
+                    service: service,
+                    date: date
+                },
+                success: function (data) {
+                    sessionStorage.setItem("delb", "1");
+                    window.location.href = "/bookings";
+                }
+            });
+
+        });
     })
+
+
+
 </script>
