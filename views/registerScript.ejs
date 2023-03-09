@@ -56,15 +56,15 @@
             
         })
 
-    });
-
-
-    // Validate that all fields are filled in
-    function validateFields(user) { 
-        if (user.firstname == "" || user.lastname == "" || user.country == "" || user.city == "" || user.address == "" || user.email == "" || user.username == "" || user.password == "") {
-            return false;
-        } else {
-            return true;
+        // Validate that all fields are filled in
+        function validateFields(user) { 
+            if (user.firstname == "" || user.lastname == "" || user.country == "" || user.city == "" || user.address == "" || user.email == "" || user.username == "" || user.password == "") {
+                return false;
+            } else {
+                return true;
+            }
         }
-    }
+
+    });
+    
 </script>

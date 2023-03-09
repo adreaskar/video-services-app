@@ -58,7 +58,7 @@ router.route("/book")
             console.log("[ERROR] - Failed to retrieve booking from the database:", error);
         }
 
-        // Check another user has already booked the service on that date.
+        // Check if another user has already booked the service on that date.
         try {
             var booking = await Booking.findOne({ service: data.service, date: data.bookdate });
             if (booking) {

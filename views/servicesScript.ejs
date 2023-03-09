@@ -77,7 +77,9 @@
                 form_data.append('name', newName);
                 form_data.append('description', newDesc);
 
-                if (validateFields(form_data)) {
+                const form_to_json = Object.fromEntries(form_data.entries());
+
+                if (validateFields(form_to_json)) {
                     // Sending the data to the server
                     $.ajax({
                         url: "/services/add",
@@ -100,20 +102,20 @@
                     toastr.error('Please fill in all fields.', 'Error');
                 }
 
-                
             });
+
         });
+
+        // Validate that all fields are filled in
+        function validateFields(data) {
+
+            if (data.image === "undefined" || data.name === null || data.description === null) {
+                return false;
+            } else {
+                return true;
+            }
+        }
         
     })
-
-    // Validate that all fields are filled in
-    function validateFields(data) {
-
-        if (data.image == undefined || data.name == undefined || data.description == undefined) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
 </script>
